@@ -21,10 +21,8 @@ INCLUDEPATH += \
     $$PWD/TTKLibrary \
     $$PWD/TTKDumper
 
-win32{
-    QT += xml
-    msvc{
-        HEADERS += \
+  QT += xml
+  HEADERS += \
             $$PWD/TTKLibrary/ttkabstractmovedialog.h \
             $$PWD/TTKLibrary/ttkabstractmoveresizewidget.h \
             $$PWD/TTKLibrary/ttkabstractmovewidget.h \
@@ -39,7 +37,6 @@ win32{
             $$PWD/TTKLibrary/ttkconcurrentqueue.h \
             $$PWD/TTKLibrary/ttkcryptographichash.h \
             $$PWD/TTKLibrary/ttkdesktopwrapper.h \
-            $$PWD/TTKLibrary/ttkdefer.h \
             $$PWD/TTKLibrary/ttkglobalhelper.h \
             $$PWD/TTKLibrary/ttkitemdelegate.h \
             $$PWD/TTKLibrary/ttklibrary.h \
@@ -47,8 +44,33 @@ win32{
             $$PWD/TTKLibrary/ttksemaphoreloop.h \
             $$PWD/TTKLibrary/ttksuperenum.h \
             $$PWD/TTKLibrary/ttktabbutton.h \
-            $$PWD/TTKLibrary/ttkthemelinelabel.h \
             $$PWD/TTKLibrary/ttktime.h \
-            $$PWD/TTKLibrary/ttktoastlabel.h
-    }
-}
+            $$PWD/TTKLibrary/ttktoastlabel.h \
+            $$PWD/ttkmoduleexport.h \
+            $$PWD/ttkqtcompat.h \
+            $$PWD/ttkqtglobal.h \
+            $$PWD/ttkglobal.h \
+            $$PWD/ttklogger.h
+
+
+SOURCES += \
+    $$PWD/TTKLibrary/ttkabstractmoveresizewidget.cpp \
+    $$PWD/TTKLibrary/ttkabstractmovedialog.cpp \
+    $$PWD/TTKLibrary/ttkabstractmovewidget.cpp \
+    $$PWD/TTKLibrary/ttkabstractthread.cpp \
+    $$PWD/TTKLibrary/ttkabstractxml.cpp \
+    $$PWD/TTKLibrary/ttkany.cpp \
+    $$PWD/TTKLibrary/ttkclickedgroup.cpp \
+    $$PWD/TTKLibrary/ttkclickedlabel.cpp \
+#    $$PWD/TTKLibrary/ttkclickedslider.cpp \
+    $$PWD/TTKLibrary/ttkcommandline.cpp \
+    $$PWD/TTKLibrary/ttkcryptographichash.cpp \
+    $$PWD/TTKLibrary/ttkdesktopwrapper.cpp \
+    $$PWD/TTKLibrary/ttkglobalhelper.cpp \
+    $$PWD/TTKLibrary/ttkitemdelegate.cpp \
+    $$PWD/TTKLibrary/ttksemaphoreloop.cpp \
+    $$PWD/TTKLibrary/ttksuperenum.cpp \
+    $$PWD/TTKLibrary/ttktabbutton.cpp \
+    $$PWD/TTKLibrary/ttktime.cpp \
+    $$PWD/TTKLibrary/ttktoastlabel.cpp
+

@@ -9,10 +9,16 @@
 
 TTKDesktopWrapper::TaskbarInfo TTKDesktopWrapper::screenTaskbar(int index)
 {
-    const QRect &sr = screenGeometry(index);
-    const QRect &dr = availableGeometry(index);
-
+#if TTK_QT_VERSION_CHECK(5,0,0)
+    QScreen *screen = QApplication::primaryScreen();
+    const QRect &dr = screen->availableGeometry();
+#else
+    QDesktopWidget *widget = QApplication::desktop();
+    const QRect &dr = widget->availableGeometry();
+#endif
     TaskbarInfo info;
+    const QRect &sr = screenGeometry(index);
+
     if(sr.left() != dr.left())
     {
         info.m_size = std::abs(sr.left() - dr.left());

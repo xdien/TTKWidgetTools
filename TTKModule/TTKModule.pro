@@ -22,6 +22,45 @@ CONFIG += plugin lib
 include($$PWD/TTKModule.pri)
 include($$PWD/../TTKWidgetTools.pri)
 
-TARGET = TTKCore
+include(../../../common.pri)
+DEST_INCLUDE_DIR = $$PWD/../../../include/TTKCore
+DEFINES += TTK_LIBRARY
+CONFIG(debug, debug|release) {
+    TARGET = TTKCored
+} else {
+    TARGET = TTKCore
+}
 
 win32:RC_FILE = $$PWD/TTKCore.rc
+
+EXTRA_FILES += $$HEADERS
+#deploy
+unix:{
+    DESTDIR  = $${DEST_LIBS}
+    linux{
+        QMAKE_POST_LINK += mkdir -p $$quote($${DEST_INCLUDE_DIR}) $$escape_expand(\\n\\t) # qmake need make mkdir -p on subdirs more than root/
+        for(FILE,EXTRA_FILES){
+            QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($${DEST_INCLUDE_DIR}) $$escape_expand(\\n\\t) # inside of libs make /include/files
+        }
+    }
+    macx{
+        QMAKE_POST_LINK += mkdir -p $$quote($${DEST_INCLUDE_DIR}) $$escape_expand(\\n\\t) # qmake need make mkdir -p on subdirs more than root/
+        for(FILE,EXTRA_FILES){
+            QMAKE_POST_LINK += $$QMAKE_COPY $$quote($$FILE) $$quote($${DEST_INCLUDE_DIR}) $$escape_expand(\\n\\t)
+        }
+        QMAKE_POST_LINK += mkdir -p $$quote($${DESTDIR}/include) $$escape_expand(\\n\\t)
+    }
+}
+
+win32: {
+    DESTDIR = $${DEST_LIBS}
+        EXTRA_FILES ~= s,/,\\,g
+        BUILD_DIR ~= s,/,\\,g
+        DEST_DIR ~= s,/,\\,g
+        DEST_INCLUDE_DIR ~= s,/,\\,g
+        QMAKE_POST_LINK += if not exist $$quote($${DEST_INCLUDE_DIR}) mkdir $$quote($${DEST_INCLUDE_DIR}) $$escape_expand(\\n\\t)# qmake need make mkdir -p on subdirs more than root/
+        for(FILE,EXTRA_FILES){
+            QMAKE_POST_LINK += $$QMAKE_COPY \"$$FILE\" \"$${DEST_INCLUDE_DIR}\" $$escape_expand(\\n\\t)
+        }
+
+}
