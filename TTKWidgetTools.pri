@@ -51,7 +51,7 @@ win32{
             QMAKE_CXXFLAGS += -std=c++11
         }
         QMAKE_CXXFLAGS += -Wunused-function -Wswitch
-        LIBS += -L$$DESTDIR -lTTKLibrary -lTTKDumper
+        LIBS += -L$$DESTDIR -lTTKLibrary
     }
 }
 
